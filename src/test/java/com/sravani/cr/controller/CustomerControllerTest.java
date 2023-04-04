@@ -45,6 +45,15 @@ public class CustomerControllerTest {
 	}
 	
 	
+	static String asJsonString(final Object obj) {
+	    try {
+	        return new ObjectMapper().writeValueAsString(obj);
+	    } catch (Exception e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+
+
 	@Test
     @DisplayName("POST /customer/register")
     void testRegisterCustomer() throws Exception {
@@ -91,13 +100,5 @@ public class CustomerControllerTest {
 	@DisplayName("GET /customer/{custId}")
     public void getCustomer() throws Exception {
         mockMvc.perform(get("/customer/1")).andExpect(status().isOk());
-    }
-
-	static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }
