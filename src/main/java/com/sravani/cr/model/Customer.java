@@ -1,29 +1,20 @@
 package com.sravani.cr.model;
 
 
-
-import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.validation.annotation.Validated;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Validated
 public class Customer {
 	@Id
@@ -41,4 +32,7 @@ public class Customer {
 	@Column(name = "dateTime")
 	@CreationTimestamp
 	private Timestamp dateTime;
+	@OneToOne
+	@JoinColumn(name = "username", referencedColumnName = "username")
+	private Users user;
 }
